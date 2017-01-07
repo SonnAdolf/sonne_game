@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sonn.web.entity.User;
 import sonn.web.mapper.UserMapper;
 
+/**
+* @ClassName: GameController 
+* @Description: the controller of game
+* @author sonne
+* @date 2017-1-7 16:20:16 
+* @version 1.0
+ */
 @Controller
 @RequestMapping("/game")
 public class GameController {

@@ -12,7 +12,7 @@ import sonn.web.mapper.UserMapper;
 public class TestUserMapper {
 	@Test
 	public void testFindAll() {
-		String conf = "applicationContext.xml";
+		String conf = "spring-common.xml";
 		ApplicationContext ac = new ClassPathXmlApplicationContext(conf);
 		UserMapper mapper = ac.getBean("userMapper", UserMapper.class);
 		List<User> lst = mapper.findAll();

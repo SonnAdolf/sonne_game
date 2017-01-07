@@ -10,10 +10,10 @@ package sonn.web.entity;
 public class User {
 	private int id;
 	private String usrname;
-	//private String nick_name;
 	private String passwd;
-	//private String register_date;
-	//private String profile_pic_path;
+	private String nick_name;
+	private String register_date;
+	private String profile_pic_path;
 	public int getId() {
 		return id;
 	}
@@ -31,5 +31,23 @@ public class User {
 	}
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
+	}
+	public String getNick_name() {
+		return nick_name;
+	}
+	public void setNick_name(String nick_name) {
+		this.nick_name = nick_name;
+	}
+	public String getRegister_date() {
+		return register_date;
+	}
+	public void setRegister_date(String register_date) {
+		this.register_date = register_date;
+	}
+	public String getProfile_pic_path() {
+		return profile_pic_path;
+	}
+	public void setProfile_pic_path(String profile_pic_path) {
+		this.profile_pic_path = profile_pic_path;
 	}
 }

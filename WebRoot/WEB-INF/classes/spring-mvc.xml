@@ -14,15 +14,13 @@
        http://www.springframework.org/schema/util 
        http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
-     <!-- 这个标签注册了Spring MVC分发请求到控制器所必须的DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter实例 -->
      <mvc:annotation-driven/>
      
     <context:component-scan base-package="sonn.web.controller"/>
-    
-    <!-- 定义视图解析器viewResolver -->
-    <bean id = "viewResolver"
-           class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
-           <property name = "prefix" value = "/jsp/"/>
-           <property name = "suffix" value = ".jsp"/>
-    </bean>
+     
+     <!-- freemarker's view resolver --> 
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="suffix" value=".ftl" />
+	</bean>
 </beans>
