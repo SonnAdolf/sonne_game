@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Sonne_game"
+  id="myeclipse.1483707088132"
+  context-root="/Sonne_game"
+  j2ee-spec="6.0"
+  archive="Sonne_game.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
