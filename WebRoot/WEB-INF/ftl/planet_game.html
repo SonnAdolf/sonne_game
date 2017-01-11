@@ -1,0 +1,98 @@
+<html>
+      <head>
+	        <title>
+			        »’œÚ
+		    </title>
+			<style type="text/css">
+				#game_zone {
+					height:570;
+					width:711;
+					background-color:aquamarine;
+					/*‘≤Ω«±ﬂæ‡*/
+					border:2px solid;
+					border-radius:15px;
+					/* Old Firefox */
+					-moz-border-radius:25px;
+				}
+			</style>
+	  </head>
+	  <body>
+			<div id="game_zone">
+				<canvas id="just_planet" style="position:absolute; left:300;top: 500;" width="99" height="49">
+				</canvas>
+			</div>
+			<script type="text/javascript">
+				
+			    function Just_Planet() {   
+				    this.x_position=300;
+					this.y_position=500;
+					
+					this.draw_just_planet = function() {
+						var c=document.getElementById("just_planet");
+						var cxt=c.getContext("2d");
+				        cxt.moveTo(44,0); cxt.lineTo(55,0);
+						cxt.lineTo(55,16.5); cxt.lineTo(99,16.5);
+						cxt.lineTo(99,27.5); cxt.lineTo(55,27.5);
+						cxt.lineTo(55,38.5); cxt.lineTo(66,38.5);
+						cxt.lineTo(66,49); cxt.lineTo(33,49);
+						cxt.lineTo(33,38.5); cxt.lineTo(44,38.5);
+						cxt.lineTo(44,27.5); cxt.lineTo(0,27.5);
+						cxt.lineTo(0,16.5); cxt.lineTo(44,16.5);
+						cxt.lineTo(44,0); cxt.stroke();
+					};
+					
+					this.mov = function(relative_x, relative_y) {
+					    var just_planet = document.getElementById("just_planet");
+						// get position from html tag's style,top and left
+						var y = just_planet.style.top;
+						var x = just_planet.style.left;
+						var y_num = parseInt(y);
+						var x_num = parseInt(x);
+						// if over the boundary
+						if (y_num > 519 || x_num > 600) {
+							return;
+						}
+						y_num = y_num + relative_y;
+						x_num = x_num + relative_x;
+						just_planet.style.top = y_num.toString();
+						just_planet.style.left = x_num.toString();
+						this.draw_just_planet();
+					};
+					
+					this.shoot = function() {
+						//var missile = new Missile(this.x_position, this.y_position);
+						//missile.init();
+					};
+					
+					this.init = function() {
+						this.draw_just_planet();
+					};
+					
+				}		
+                var my_planet = new Just_Planet();			
+                //my_planet.draw_just_planet();
+				my_planet.init();
+				document.onkeydown = function(e){
+					if (!e)e=window.event;
+					switch(e.keyCode | e.which | e.charCode){
+						case 37:{
+							my_planet.mov(-20,0);
+							break;
+						}
+						case 38:{
+							my_planet.mov(0,-20);
+							break;
+						}
+						case 39:{
+							my_planet.mov(20,0);
+							break;
+						}
+						case 40:{
+							my_planet.mov(0,20);
+							break;
+						}
+					}
+				}
+			</script>
+	  </body>
+</html>
