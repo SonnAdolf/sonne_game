@@ -18,60 +18,91 @@
 	  </head>
 	  <body>
 			<div id="game_zone">
-				<canvas id="just_planet" style="position:absolute; left:300;top: 500;" width="99" height="49">
+				<canvas id="zone" style="position:absolute; left:0;top:0;" width="711" height="570">
 				</canvas>
 			</div>
 			<script type="text/javascript">
+				function Missile(x, y, direction) {
+					this.x_position = x;
+					this.y_position = y;
+					this.direction = direction;
+					
+					this.init = function() {
+					    // set the timer 
+						window.setInterval(this.fly,3000);
+					};
+					
+					this.erase = function() {
+					};
+					
+					this.draw = function() {
+						var c=document.getElementById("zone");
+						var cxt=c.getContext("2d");
+						cxt.fillStyle="#ff0000";
+						cxt.fillReact(this.x_position,this.y_position,50,50);
+					};
+					
+					this.fly = function() {
+					    alert('fly a while');
+						if (this.direction == 1) {
+							this.y_position = this.y_position + 10;
+						} else {
+							this.y_position = this.y_position - 10;
+						}
+						if (this.y_position > 550 || this.y_position < 0) {
+						}
+					};
+				}
 				
 			    function Just_Planet() {   
 				    this.x_position=300;
 					this.y_position=500;
 					
 					this.draw_just_planet = function() {
-						var c=document.getElementById("just_planet");
+						var c=document.getElementById("zone");
 						var cxt=c.getContext("2d");
-				        cxt.moveTo(44,0); cxt.lineTo(55,0);
-						cxt.lineTo(55,16.5); cxt.lineTo(99,16.5);
-						cxt.lineTo(99,27.5); cxt.lineTo(55,27.5);
-						cxt.lineTo(55,38.5); cxt.lineTo(66,38.5);
-						cxt.lineTo(66,49); cxt.lineTo(33,49);
-						cxt.lineTo(33,38.5); cxt.lineTo(44,38.5);
-						cxt.lineTo(44,27.5); cxt.lineTo(0,27.5);
-						cxt.lineTo(0,16.5); cxt.lineTo(44,16.5);
-						cxt.lineTo(44,0); cxt.stroke();
+						var x = this.x_position;
+						var y = this.y_position;
+				        cxt.moveTo(x+44,y); cxt.lineTo(x+55,y);
+						cxt.lineTo(x+55,y+16.5); cxt.lineTo(x+99,y+16.5);
+						cxt.lineTo(x+99,y+27.5); cxt.lineTo(x+55,y+27.5);
+						cxt.lineTo(x+55,y+38.5); cxt.lineTo(x+66,y+38.5);
+						cxt.lineTo(x+66,y+49); cxt.lineTo(x+33,y+49);
+						cxt.lineTo(x+33,y+38.5); cxt.lineTo(x+44,y+38.5);
+						cxt.lineTo(x+44,y+27.5); cxt.lineTo(x,y+27.5);
+						cxt.lineTo(x,y+16.5); cxt.lineTo(x+44,y+16.5);
+						cxt.lineTo(x+44,y); cxt.stroke();
+					};
+					
+					this.erase = function() {
+						
 					};
 					
 					this.mov = function(relative_x, relative_y) {
-					    var just_planet = document.getElementById("just_planet");
-						// get position from html tag's style,top and left
-						var y = just_planet.style.top;
-						var x = just_planet.style.left;
-						var y_num = parseInt(y);
-						var x_num = parseInt(x);
 						// if over the boundary
-						if (y_num > 519 || x_num > 600) {
+						if (this.y_position + relative_y > 519 ||this.x_position + relative_x > 600) {
 							return;
 						}
-						y_num = y_num + relative_y;
-						x_num = x_num + relative_x;
-						just_planet.style.top = y_num.toString();
-						just_planet.style.left = x_num.toString();
+						this.erase();
+						this.x_position = this.x_position + relative_x;
+						this.y_position = this.y_position + relative_y;
 						this.draw_just_planet();
 					};
 					
 					this.shoot = function() {
-						//var missile = new Missile(this.x_position, this.y_position);
-						//missile.init();
+						var missile = new Missile(this.x_position, this.y_position, 0);
+						missile.init();
 					};
 					
 					this.init = function() {
 						this.draw_just_planet();
 					};
 					
-				}		
-                var my_planet = new Just_Planet();			
-                //my_planet.draw_just_planet();
+				}	
+				
+                var my_planet = new Just_Planet();	
 				my_planet.init();
+
 				document.onkeydown = function(e){
 					if (!e)e=window.event;
 					switch(e.keyCode | e.which | e.charCode){
@@ -89,6 +120,10 @@
 						}
 						case 40:{
 							my_planet.mov(0,20);
+							break;
+						}
+						case 32:{
+							my_planet.shoot();
 							break;
 						}
 					}
