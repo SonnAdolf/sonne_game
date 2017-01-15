@@ -7,7 +7,7 @@
 				#game_zone {
 					height:570;
 					width:711;
-					background-color:aquamarine;
+					
 					/*Ô²½Ç±ß¾à*/
 					border:2px solid;
 					border-radius:15px;
@@ -29,7 +29,8 @@
 					
 					this.init = function() {
 					    // set the timer 
-						window.setInterval(this.fly,3000);
+						//window.setInterval("this.fly()",3000);
+						this.draw();
 					};
 					
 					this.erase = function() {
@@ -38,19 +39,15 @@
 					this.draw = function() {
 						var c=document.getElementById("zone");
 						var cxt=c.getContext("2d");
-						cxt.fillStyle="#ff0000";
-						cxt.fillReact(this.x_position,this.y_position,50,50);
+						cxt.fillStyle="#FF0000";
+						cxt.fillRect(this.x_position+44.5,this.y_position-10,10,10);
 					};
 					
 					this.fly = function() {
-					    alert('fly a while');
-						if (this.direction == 1) {
-							this.y_position = this.y_position + 10;
-						} else {
-							this.y_position = this.y_position - 10;
-						}
-						if (this.y_position > 550 || this.y_position < 0) {
-						}
+						alert("fly");
+						alert(this.y_position);
+						this.y_position = this.y_position - 10;
+						this.draw();
 					};
 				}
 				
@@ -71,11 +68,24 @@
 						cxt.lineTo(x+33,y+38.5); cxt.lineTo(x+44,y+38.5);
 						cxt.lineTo(x+44,y+27.5); cxt.lineTo(x,y+27.5);
 						cxt.lineTo(x,y+16.5); cxt.lineTo(x+44,y+16.5);
-						cxt.lineTo(x+44,y); cxt.stroke();
+						cxt.lineTo(x+44,y); cxt.strokeStyle='red'; cxt.stroke();
 					};
 					
 					this.erase = function() {
-						
+						var c=document.getElementById("zone");
+						var cxt=c.getContext("2d");
+						var x = this.x_position;
+						var y = this.y_position; 
+				        //cxt.moveTo(x+44,y); cxt.lineTo(x+55,y);
+						//cxt.lineTo(x+55,y+16.5); cxt.lineTo(x+99,y+16.5);
+						//cxt.lineTo(x+99,y+27.5); cxt.lineTo(x+55,y+27.5);
+						//cxt.lineTo(x+55,y+38.5); cxt.lineTo(x+66,y+38.5);
+						//cxt.lineTo(x+66,y+49); cxt.lineTo(x+33,y+49);
+						//cxt.lineTo(x+33,y+38.5); cxt.lineTo(x+44,y+38.5);
+						//cxt.lineTo(x+44,y+27.5); cxt.lineTo(x,y+27.5);
+						//cxt.lineTo(x,y+16``.5); cxt.lineTo(x+44,y+16.5);
+						//cxt.lineTo(x+44,y);   cxt.strokeStyle='yellow'; cxt.stroke();
+						cxt.clearRect(x,y,99,49);						
 					};
 					
 					this.mov = function(relative_x, relative_y) {
@@ -90,6 +100,7 @@
 					};
 					
 					this.shoot = function() {
+					    alert(this.x_position);
 						var missile = new Missile(this.x_position, this.y_position, 0);
 						missile.init();
 					};

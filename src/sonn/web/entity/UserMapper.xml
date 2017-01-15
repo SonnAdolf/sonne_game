@@ -6,4 +6,9 @@
  	<select id = "findAll" resultType = "sonn.web.entity.User">
  		select ID,USRNAME,PASSWD from USER
  	</select>
+ 	<!--
+  	<select id = "findByUsername" resultType = "sonn.web.entity.User">
+ 		select ID,USRNAME,PASSWD from USER where USRNAME = 
+ 	</select>
+ 	  -->
  </mapper>
