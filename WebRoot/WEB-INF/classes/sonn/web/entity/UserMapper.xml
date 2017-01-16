@@ -4,11 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace = "sonn.web.mapper.UserMapper">
  	<select id = "findAll" resultType = "sonn.web.entity.User">
- 		select ID,USRNAME,PASSWD from USER
+ 		select ID,USRNAME,PASSWD,IS_ADMIN from USER
  	</select>
- 	<!--
-  	<select id = "findByUsername" resultType = "sonn.web.entity.User">
- 		select ID,USRNAME,PASSWD from USER where USRNAME = 
+  	<select id = "findByUsername"  parameterType="String" resultType = "sonn.web.entity.User">
+ 		select ID,USRNAME,PASSWD,IS_ADMIN from USER where USRNAME = #{usrname}
  	</select>
- 	  -->
  </mapper>

@@ -14,6 +14,7 @@ public class User {
 	private String nick_name;
 	private String register_date;
 	private String profile_pic_path;
+	private boolean is_admin;
 	public int getId() {
 		return id;
 	}
@@ -49,5 +50,11 @@ public class User {
 	}
 	public void setProfile_pic_path(String profile_pic_path) {
 		this.profile_pic_path = profile_pic_path;
+	}
+	public boolean isIs_admin() {
+		return is_admin;
+	}
+	public void setIs_admin(boolean is_admin) {
+		this.is_admin = is_admin;
 	}
 }

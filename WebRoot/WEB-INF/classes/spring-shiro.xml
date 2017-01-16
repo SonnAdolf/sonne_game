@@ -11,6 +11,8 @@
 		<property name="unauthorizedUrl" value="" />
 		<property name="filterChainDefinitions">
 			<value>
+				/admin/** = roles[admin]
+				/space/** = roles[user] 
 			</value>
 		</property>
 	</bean>
@@ -18,6 +20,6 @@
 		<property name="realm" ref="authenticationRealm" />
 	</bean>
 
-	<bean id="authenticationRealm" class="sonn.web.shiro.realm.AuthenticationRealm">
+	<bean id="authenticationRealm" class="sonn.web.my_shiro.MyRealm">
 	</bean>
 </beans>

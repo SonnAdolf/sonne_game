@@ -13,4 +13,5 @@ import sonn.web.entity.User;
  */
 public interface UserMapper {
 	public List<User> findAll();
+	public User findByUsername(String usrname);
 }

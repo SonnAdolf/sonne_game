@@ -20,32 +20,31 @@ import sonn.web.entity.User;
 import com.alibaba.fastjson.JSONObject;
 
 /**
-* @ClassName: LoginController 
-* @Description: Controller of login
-* @author sonne
-* @date 2017-1-15 13:07:00 
-* @version 1.0
+ * @ClassName: LoginController
+ * @Description: Controller of login
+ * @author sonne
+ * @date 2017-1-15 13:07:00
+ * @version 1.0
  */
 @Controller
 @RequestMapping("/login")
 public class LoginController {
 
-//	@Resource(name = "userMapper")
-//	private UserMapper userMapper;
-	
 	/*
-	 *  show the web page of login action. 
+	 * show the web page of login action.
 	 */
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public String submit(HttpServletRequest request,Model model) throws Exception {
+	public String submit(HttpServletRequest request, Model model)
+			throws Exception {
 		String path = request.getContextPath();
-		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+		String basePath = request.getScheme() + "://" + request.getServerName()
+				+ ":" + request.getServerPort() + path;
 		model.addAttribute("base", basePath);
 		return "login";
 	}
-	
+
 	/*
-	 *  login submit, check, save the session.
+	 * login submit, check, save the session.
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
@@ -53,30 +52,27 @@ public class LoginController {
 			HttpServletResponse response, User usr) throws Exception {
 		JSONObject jo = new JSONObject();
 		String usrname = usr.getUsrname();
-		String passwd =  usr.getPasswd();
-		UsernamePasswordToken token = new UsernamePasswordToken(usrname,passwd);
-	    Subject subject = SecurityUtils.getSubject();
-        try {
-            subject.login(token);
-        } catch (IncorrectCredentialsException ice) {
-    		jo.put("success", false);
-    		jo.put("msg", "密码错误");
-    		return jo;
-        } catch (UnknownAccountException uae) {
-    		jo.put("success", false);
-    		jo.put("msg", "未知用户名");
-    		return jo;
-        } catch (ExcessiveAttemptsException eae) {
-    		jo.put("success", false);
-    		jo.put("msg", "登录次数过多");
-    		return jo;
-        }
-		
-		//User db_usr = userMapper.findByUsername(usrname);
-        //subject.getSession().setAttribute("usr", db_usr);
+		String passwd = usr.getPasswd();
+		UsernamePasswordToken token = new UsernamePasswordToken(usrname, passwd);
+		Subject subject = SecurityUtils.getSubject();
+		try {
+			subject.login(token);
+		} catch (IncorrectCredentialsException ice) {
+			jo.put("success", false);
+			jo.put("msg", "密码错误");
+			return jo;
+		} catch (UnknownAccountException uae) {
+			jo.put("success", false);
+			jo.put("msg", "未知用户名");
+			return jo;
+		} catch (ExcessiveAttemptsException eae) {
+			jo.put("success", false);
+			jo.put("msg", "登录次数过多");
+			return jo;
+		}
 		jo.put("success", true);
 		jo.put("msg", "登录成功");
 		return jo;
 	}
-	
+
 }
